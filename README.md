@@ -24,8 +24,9 @@ THEN
 ## API's:
 
 Ticketmaster
-GoogleMaps
 BreweryDB
+Open Weather
+GoogleMaps (optional)
 
 ## Task Breakdown:
 
@@ -52,13 +53,29 @@ move second stage to production
 
 ## Application Requirements
 • Must use at least two server-side APIs
+
 • Must use a CSS framework other than Bootstrap
+
 • Must be interactive (i.e: accept and respond to user input)
+
 • Use at least one new third-party API
+
 • Must have a polished UI
+
 • Must meet good quality coding standards
+
 • Does not use alerts, confirms or prompts (look into modals)
+
 • Must be deployed to GitHub Pages
 
 ## Repo link
 <https://github.com/rehamilton/Venue_Finder>
+
+
+## 21/3/20 Task:
+
+Lisheng: GoogleMap integration research
+
+Shuo: Third Party APIs sourcing
+
+Roz: Server side APIs sourcing
