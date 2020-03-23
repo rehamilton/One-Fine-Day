@@ -11,34 +11,36 @@ User can either randomize the choices combination or save as preference.
 
 ## Usage
 
-- deployed app: <https://rehamilton.github.io/One-Fine-Day/>
-- repo link: <https://github.com/rehamilton/One-Fine-Day>
+- Deployed app: <https://rehamilton.github.io/One-Fine-Day/>
+- Repo link: <https://github.com/rehamilton/One-Fine-Day>
 
 ## User Story
 
-As a user
-I want to browser a range of choice on drink, recipe and movie.
-So I can make choice on how to spend my "One Fine Day"!
+- As a user
+- I want to browser a range of choice on drink, recipe and movie.
+- So I can make choice on how to spend my "One Fine Day"!
 
 ## Acceptance Criteria
 
-GIVEN the web open
-WHEN I click "Random" button
-THEN drink, recipe and movie cards will be updated with random content
-WHEN I click "Hold" button at any card
-THEN the hold card content won't change
-WHEN I click "preset" button
-THEN the three choices will saved as user preference and display in the card content
+- GIVEN the web open
+- WHEN I click "Random" button
+- THEN drink, recipe and movie cards will be updated with random content
+- WHEN I click "Hold" button at any card
+- THEN the hold card content won't change
+- WHEN I click "preset" button
+- THEN the three choices will saved as user preference and display in the card content
 
-## Wire Frame:
+## Wire Frame
 
 ![mockup](./Assets/wireframe.png)
 
-## API used:
+## API used
 
-BreweryDB, spoonacular, OMDB
+BreweryDB <https://www.brewerydb.com>
+spoonacular <https://spoonacular.com>
+OMDB <https://www.omdbapi.com>
 
-## Task Breakdown:
+## Task Breakdown
 
 - Brainstorming initial concept (mvp)
 - Research API's and get keys
