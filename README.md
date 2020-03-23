@@ -6,7 +6,7 @@
 
 ## Overview
 
-Create an app that provide user a range of choices on drink, recipe and movie.
+Create an app that provide user a range of choices on drink, recipe and movie.\
 User can either randomize the choices combination or save as preference.
 
 ## Usage
@@ -36,8 +36,8 @@ User can either randomize the choices combination or save as preference.
 
 ## API used
 
-BreweryDB <https://www.brewerydb.com>
-spoonacular <https://spoonacular.com>
+BreweryDB <https://www.brewerydb.com>\
+spoonacular <https://spoonacular.com>\
 OMDB <https://www.omdbapi.com>
 
 ## Task Breakdown
