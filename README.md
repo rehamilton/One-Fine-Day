@@ -1,8 +1,8 @@
-## Project Title: One Fine Day
+# Project Title: One Fine Day
 
 ## Milestone
 
-- Project presentation by 30/03/2020
+Project presentation by 30/03/2020
 
 ## Overview
 
@@ -11,8 +11,8 @@ User can either randomize the choices combination or save as preference.
 
 ## Usage
 
-- Deployed app: <https://rehamilton.github.io/One-Fine-Day/>
-- Repo link: <https://github.com/rehamilton/One-Fine-Day>
+Deployed app: <https://rehamilton.github.io/One-Fine-Day/>\
+Repo link: <https://github.com/rehamilton/One-Fine-Day>
 
 ## User Story
 
@@ -43,7 +43,7 @@ OMDB <https://www.omdbapi.com>
 ## Task Breakdown
 
 Brainstorming initial concept (mvp)\
-Research API's and get keys\
+Research API and get keys\
 test keys to ensure they provide the right info\
 review and choose css framework\
 Basic HTML\
