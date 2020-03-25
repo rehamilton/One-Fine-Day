@@ -1,21 +1,11 @@
 $(document).ready(function() {
 
-var movieKey = "d4f7630d";
-
 $("#random-button").on("click", function(event) {
   event.preventDefault();
 
-//random button
-// $("#random-button").on("click", function(event) {
-//     //ajax call query
-//     //display data in cards
-// })
-
-// $("#preset").on("click", function(event) {
-    
-// })
-
 getDrink()
+
+getMovie()
 
 //function to get random drink
 function getDrink () {
@@ -83,35 +73,38 @@ function getDrinkIngredients(drinkResponse) {
             }
         }
 
-};
-  var randomNum = "";
-  for (var i = 0; i < 7; i++) {
-    var number = Math.floor(Math.random() * 10);
-    randomNum += number;
-  }
-  var movieID = "tt" + randomNum;
-//   var queryURL = "https://www.omdbapi.com/?i=" + movieID + "&apikey=" + movieKey;
-  var queryURL = "http://www.omdbapi.com/?i=tt1375666&apikey=d4f7630d";
+}
+
+});
+
+function getMovie() {
+  var movieKey = "73c47b3bcb013637f6b5dec34d836076";
+
+  //get latest movie id
+  var maxMovieID = "";
+  var latestMv =
+    "https://api.themoviedb.org/3/movie/latest?api_key=" + movieKey + "&language=en-US";
+   $.ajax({
+     url: latestMv,
+     method: "GET"
+   }).then(function(response) {
+      maxMovieID = response.id;
+   }) 
+
+
+  var movieID = Math.floor(Math.random() * maxMovieID);
+  var queryURL = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + movieKey;
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
     console.log(response);
 
-    var posterDiv = $("<img>");
-    posterDiv.attr("id", "poster-view");
-    posterDiv.attr("src", response.Poster);
-    $("#movie-view").prepend(posterDiv);
+    $("#movie-img").attr("src", response.poster_path);
+    $("#movie-text").text(response.overview);
+    
+  })
+}
 
-    var ratedDiv = $("<div>");
-    ratedDiv.attr("id", "rated-view");
-    $("#movie-view").prepend(ratedDiv);
-    $("#rated-view").text("Rated: " + response.Rated);
 
-    var titleDiv = $("<div>");
-    titleDiv.attr("id", "title-view");
-    $("#movie-view").prepend(titleDiv);
-    $("#title-view").text("Title: " + response.Title);
-  });
 })
-});
