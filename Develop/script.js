@@ -41,7 +41,7 @@ function getDrinkIngredients(drinkResponse) {
     var measureIndexArray = []
 
         for (i=1; i<=15; i++) {
-            // console.log(i);
+            console.log(i);
             var ingredientIndex = "strIngredient" + [i]
             // console.log(ingredientIndex);
             ingredientIndexArray.push(ingredientIndex)
