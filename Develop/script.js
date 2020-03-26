@@ -3,9 +3,9 @@ $(document).ready(function() {
 $("#random-button").on("click", function(event) {
   event.preventDefault();
 
-getDrink()
+getDrink();
 
-getMovie()
+getMovie();
 
 //function to get random drink
 function getDrink () {
@@ -88,8 +88,7 @@ function getMovie() {
      url: latestMv,
      method: "GET"
    }).then(function(response) {
-      maxMovieID = response.id;
-   }) 
+      maxMovieID = response.id;   
 
 
   var movieID = Math.floor(Math.random() * maxMovieID);
@@ -99,9 +98,10 @@ function getMovie() {
     method: "GET"
   }).then(function(response) {
     console.log(response);
-
-    $("#movie-img").attr("src", response.poster_path);
     $("#movie-text").text(response.overview);
+    var imgURL = "https://image.tmdb.org/t/p/original" + response.poster_path;
+    $("#movie-img").attr("src", imgURL);
+  })
     
   })
 }
