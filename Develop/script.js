@@ -1,25 +1,11 @@
-//using Umbrella JS
-// can't find .ready() method
+$(document).ready(function() {
 
-var apiKey = "";
+$("#random-button").on("click", function(event) {
+  event.preventDefault();
 
-function init() {
-    //do nothing if localstorage is null
-    //get data from localstorage saved history
-    //put into preset buttons
-}
+getDrink();
 
-//random button
-// $("#random-button").on("click", function(event) {
-//     //ajax call query
-//     //display data in cards
-// })
-
-// $("#preset").on("click", function(event) {
-    
-// })
-
-getDrink()
+getMovie();
 
 //function to get random drink
 function getDrink () {
@@ -87,4 +73,38 @@ function getDrinkIngredients(drinkResponse) {
             }
         }
 
-};
+}
+
+});
+
+function getMovie() {
+  var movieKey = "73c47b3bcb013637f6b5dec34d836076";
+
+  //get latest movie id
+  var maxMovieID = "";
+  var latestMv =
+    "https://api.themoviedb.org/3/movie/latest?api_key=" + movieKey + "&language=en-US";
+   $.ajax({
+     url: latestMv,
+     method: "GET"
+   }).then(function(response) {
+      maxMovieID = response.id;   
+
+
+  var movieID = Math.floor(Math.random() * maxMovieID);
+  var queryURL = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + movieKey;
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+    $("#movie-text").text(response.overview);
+    var imgURL = "https://image.tmdb.org/t/p/original" + response.poster_path;
+    $("#movie-img").attr("src", imgURL);
+  })
+    
+  })
+}
+
+
+})
