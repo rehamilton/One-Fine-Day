@@ -135,33 +135,6 @@ function getMovie() {
     $("#movieInfo").append(ratingHeader, ratingText, breakHTML, plotHeader, plotText)
 
   })
-  
-  // var movieKey = "73c47b3bcb013637f6b5dec34d836076";
-
-  // //get latest movie id
-  // var maxMovieID = "";
-  // var latestMv =
-  //   "https://api.themoviedb.org/3/movie/latest?api_key=" + movieKey + "&language=en-US";
-  //  $.ajax({
-  //    url: latestMv,
-  //    method: "GET"
-  //  }).then(function(response) {
-  //     maxMovieID = response.id;   
-
-
-  // var movieID = Math.floor(Math.random() * maxMovieID);
-  // var queryURL = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + movieKey;
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-  // }).then(function(response) {
-  //   console.log(response);
-  //   $("#movie-text").text(response.overview);
-  //   var imgURL = "https://image.tmdb.org/t/p/original" + response.poster_path;
-  //   $("#movie-img").attr("src", imgURL);
-  // })
-    
-  // })
 }
 
 function getRecipe() {
