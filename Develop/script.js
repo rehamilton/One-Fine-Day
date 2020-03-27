@@ -7,104 +7,185 @@ getDrink();
 
 getMovie();
 
+getRecipe()
+
+
+});
+
 //function to get random drink
 function getDrink () {
+
+  $("#ingredients").empty()
     
-    var drinkUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+  var drinkUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 
-    $.ajax({
+  $.ajax({
 
-        url: drinkUrl,
-        method: "GET"
+      url: drinkUrl,
+      method: "GET"
 
-        //on error show apologies and have a drink on us (use stored image)
-        
-    }).then(function(drinkResponse) {
+      //on error show apologies and have a drink on us (use stored image)
+      
+  }).then(function(drinkResponse) {
 
-        console.log(drinkResponse.drinks[0]);
-        var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb
-        $("#drinkImage").attr("src", drinkImageUrl)
+      console.log(drinkResponse.drinks[0]);
+      var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb
+      $("#drinkImage").attr("src", drinkImageUrl)
 
-        var drinkName = drinkResponse.drinks[0].strDrink
-        $("#drinkName").text(drinkName)
-        //var drinkInstruct = drinkResponse.drinks[0].strInstructions
-        
-        getDrinkIngredients(drinkResponse)
-            
-            
-        
-    });
+      var drinkName = drinkResponse.drinks[0].strDrink
+      $("#drinkName").text(drinkName)
+      //var drinkInstruct = drinkResponse.drinks[0].strInstructions
+
+      ingredientHeader = $("<p>").text("Ingredients:")
+      ingredientHeader.attr("id", "ingredientHeader")
+      
+      $("#ingredients").append(ingredientHeader)
+      
+      getDrinkIngredients(drinkResponse)
+          
+          
+      
+  });
 }
 
 function getDrinkIngredients(drinkResponse) {
-    var ingredientIndexArray = []
-    var measureIndexArray = []
+  
+  $("#ingredientHeader").empty()
+  
+  var ingredientIndexArray = []
+  var measureIndexArray = []
 
-        for (i=1; i<=15; i++) {
-            console.log(i);
-            var ingredientIndex = "strIngredient" + [i]
-            // console.log(ingredientIndex);
-            ingredientIndexArray.push(ingredientIndex)
+  for (i=1; i<=15; i++) {
+    //console.log(i);
+    var ingredientIndex = "strIngredient" + [i]
+    // console.log(ingredientIndex);
+    ingredientIndexArray.push(ingredientIndex)
 
-            var measureIndex = "strMeasure" + [i]
-            measureIndexArray.push(measureIndex)
-            
-            
-        }
+    var measureIndex = "strMeasure" + [i]
+    measureIndexArray.push(measureIndex)
+        
+  }
 
-        // console.log(ingredientIndexArray);
-        console.log(measureIndexArray);
+  for (i=0; i<ingredientIndexArray.length; i++) {
+    //console.log(ingredientIndexArray[i]);
+    var ingredientNo = ingredientIndexArray[i];
+    var ingredient = drinkResponse.drinks[0][ingredientNo];
+    var measureNo = measureIndexArray[i];
+    var measure = drinkResponse.drinks[0][measureNo];
+    //console.log(ingredientNo);
+    //console.log(ingredient);
 
-        for (i=0; i<ingredientIndexArray.length; i++) {
-            //console.log(ingredientIndexArray[i]);
-            var ingredientNo = ingredientIndexArray[i];
-            var ingredient = drinkResponse.drinks[0][ingredientNo];
-            var measureNo = measureIndexArray[i];
-            var measure = drinkResponse.drinks[0][measureNo];
-            //console.log(ingredientNo);
-            console.log(ingredient);
+    if (ingredient != null) {
 
-            if (ingredient != null) {
+      ingredientHTML = $("<p>").text(ingredient + " - " + measure);
+      ingredientHTML.attr("id",[i]);
+      $("#ingredientHeader").append(ingredientHTML);
+        
+    }
+  }
 
-                ingredientHTML = $("<p>").text(ingredient + " - " + measure);
-                ingredientHTML.attr("id",[i]);
-                $("#ingredients").append(ingredientHTML);
-                
-            }
-        }
+  getDrinkInstructions(drinkResponse)
 
 }
 
 });
 
-function getMovie() {
-  var movieKey = "73c47b3bcb013637f6b5dec34d836076";
+function getDrinkInstructions(drinkResponse) {
 
-  //get latest movie id
-  var maxMovieID = "";
-  var latestMv =
-    "https://api.themoviedb.org/3/movie/latest?api_key=" + movieKey + "&language=en-US";
-   $.ajax({
-     url: latestMv,
-     method: "GET"
-   }).then(function(response) {
-      maxMovieID = response.id;   
+  var instruction = drinkResponse.drinks[0].strInstructions
+  console.log(instruction);
 
+  instructionHeader = $("<p>").text("Instructions:")
+  instructionText = $("<p>").text(instruction)
 
-  var movieID = Math.floor(Math.random() * maxMovieID);
-  var queryURL = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + movieKey;
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response);
-    $("#movie-text").text(response.overview);
-    var imgURL = "https://image.tmdb.org/t/p/original" + response.poster_path;
-    $("#movie-img").attr("src", imgURL);
-  })
-    
-  })
+  instructionHeader.append(instructionText)
+  $("#ingredientHeader").append(instructionHeader)
+
 }
 
+function getMovie() {
 
-})
+  $("#movieInfo").empty()
+  
+  var movieUrl = "https://api.themoviedb.org/3/discover/movie?api_key=f239018644aca27fb1793b1dbcab8d4c"
+
+  $.ajax({
+    url: movieUrl,
+    method: "GET"
+
+  }).then(function(movieResponse) {
+    
+    var movieID = Math.floor(Math.random() * 19);
+    console.log(movieResponse.results[movieID]);
+    var movie = movieResponse.results[movieID].title
+    var poster = "https://image.tmdb.org/t/p/original" + movieResponse.results[movieID].poster_path
+    var rating = movieResponse.results[movieID].vote_average + "/10"
+    var plot = movieResponse.results[movieID].overview
+    
+    $("#movieName").text(movie)
+
+    $("#movie-img").attr("src", poster)
+    
+    ratingHeader = $("<p>").text("Rating:")
+    ratingText = $("<p>").text(rating)
+    plotHeader = $("<p>").text("Plot:")
+    plotText = $("<p>").text(plot)
+    breakHTML = $("<br>")
+    
+    $("#movieInfo").append(ratingHeader, ratingText, breakHTML, plotHeader, plotText)
+
+  })
+  
+  // var movieKey = "73c47b3bcb013637f6b5dec34d836076";
+
+  // //get latest movie id
+  // var maxMovieID = "";
+  // var latestMv =
+  //   "https://api.themoviedb.org/3/movie/latest?api_key=" + movieKey + "&language=en-US";
+  //  $.ajax({
+  //    url: latestMv,
+  //    method: "GET"
+  //  }).then(function(response) {
+  //     maxMovieID = response.id;   
+
+
+  // var movieID = Math.floor(Math.random() * maxMovieID);
+  // var queryURL = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + movieKey;
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
+  // }).then(function(response) {
+  //   console.log(response);
+  //   $("#movie-text").text(response.overview);
+  //   var imgURL = "https://image.tmdb.org/t/p/original" + response.poster_path;
+  //   $("#movie-img").attr("src", imgURL);
+  // })
+    
+  // })
+}
+
+function getRecipe() {
+
+  $("#recipeSummary").empty()
+
+  var recipeUrl = "https://api.spoonacular.com/recipes/random?apiKey=7c0986ad6c3445a491cf76f7d2a655ab"
+
+  $.ajax({
+    url: recipeUrl,
+    method: "GET"
+  }).then(function(recipeResponse) {
+
+    console.log(recipeResponse.recipes[0]);
+    var recipeImage = recipeResponse.recipes[0].image
+    var recipeName = recipeResponse.recipes[0].title
+    var recipeSummary = recipeResponse.recipes[0].summary
+
+    summaryHTML = $("<p>").text(recipeSummary)
+
+    $("#recipeImage").attr("src", recipeImage)
+    $("#recipeName").text(recipeName)
+    $("#recipeSummary").append(recipeSummary)
+
+  })
+
+}
