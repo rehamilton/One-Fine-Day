@@ -10,17 +10,29 @@ h1,h2{
     text-shadow: black !important;  
 }
 
-
 .button{
-width: 95%;
-margin-left: 1.5rem;
+    width: 100%;
+    font-family: 'Baloo Thambi 2', cursive;
+    background-color:#d6d3d3 !important;
+}
+
+#drinkRandom, #recipeRandom, #movieRandom{
+
+    background-color:#506165!important;
+    color: white !important;
+    font-family: 'Baloo Thambi 2', cursive;
+    width: 100%;
+    
+
 }
 
 #random-button{
     background-color: #506165!important;
     color: white;
     font-family: 'Baloo Thambi 2', cursive;
-    height: 4rem
+    height: 4rem;
+    width: 95%;
+    margin-left: 1.5rem;
 }    
 
 
@@ -45,7 +57,7 @@ p{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgb(214, 211, 211);
+    background-color: #d6d3d3;
 }
 
 #recipeImage {
@@ -53,7 +65,7 @@ p{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgb(214, 211, 211);
+    background-color:#d6d3d3;
 }
 
 #drinkImage {
@@ -61,5 +73,9 @@ p{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgb(214, 211, 211);
+    background-color: #d6d3d3;
+}
+
+.card{
+    background-color:  #d6d3d3 !important;
 }
