@@ -7,11 +7,13 @@ $(document).ready(function() {
 $("#random-button").on("click", function(event) {
   event.preventDefault();
 
-getDrink();
+  getDrink();
 
-getMovie();
+  getMovie();
 
-getRecipe();
+  getRecipe();
+});
+
 
 $("#movieRandom").on("click", function(event) {
   getMovie();
@@ -25,7 +27,6 @@ $("#drinkRandom").on("click", function(event) {
   getDrink();
 });
 
-});
 
 //function to get random drink
 function getDrink () {
@@ -60,7 +61,7 @@ function getDrink () {
       getDrinkIngredients(drinkResponse)
           
     var newDrink = $("<button>");
-    newDrink.addClass("button").text(drinkName);
+    newDrink.addClass("button drink-button").text(drinkName);
     $("#drink-history").append(newDrink);
     $(".drink-button")
       .first()
@@ -161,7 +162,7 @@ function getMovie() {
     $("#movieInfo").append(ratingHeader, ratingText, breakHTML, plotHeader, plotText)
 
     var newMovie = $("<button>");
-    newMovie.addClass("button").text(movie);
+    newMovie.addClass("button movie-button").text(movie);
     $("#movie-history").append(newMovie);
     $(".movie-button").first().remove();
     movieList.shift();
@@ -194,7 +195,7 @@ function getRecipe() {
     $("#recipeSummary").append(recipeSummary)
 
     var newRecipe = $("<button>");
-    newRecipe.addClass("button").text(recipeName);
+    newRecipe.addClass("button recipe-button").text(recipeName);
     $("#recipe-history").append(newRecipe);
     $(".recipe-button")
       .first()
