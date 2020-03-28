@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./Develop/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./Develop/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/umbrellajs Github"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -42,7 +42,7 @@
             Feel bored at home ? Luckily you find me!
         Choose your favourite DRINK, RECEIPE and MOVIE !</p>
     </div>
-  
+
 
 
 
@@ -61,8 +61,8 @@
                     </header>
 
                     <div class="card-image">
-                        <figure class="image is-4by3">
-                        <img id="drinkImage" src="Assets/drink.jpg" alt="Placeholder image">
+                        <figure id= "drinkImage" class="image is-4by3 drinkImage">
+                        
                         </figure>
                     </div>
 
@@ -70,10 +70,10 @@
                         <div class="content">
                             <h3 id="drinkName"></h3>
                             <div id="ingredients">
-                                
+
                             </div>
                             <footer class="card-footer">
-                                <a href="#" class="card-footer-item">Change to another one!</a>
+                                <button class="button" id="drinkRandom">Show me something else!</button>
                             </footer>
                         </div>
                     </div>
@@ -84,13 +84,13 @@
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                            MEAL RECEIPE
+                            MEAL RECIPE
                         </p>
                     </header>
 
                     <div class="card-image">
-                        <figure class="image is-4by3">
-                        <img id = "recipeImage" src="./Assets/food.jpg" alt="Placeholder image">
+                        <figure id = "recipeImage" class="image is-4by3">
+                        
                         </figure>
                     </div>
 
@@ -98,12 +98,11 @@
                         <div class="content">
                             <h3 id="recipeName"></h3>
                             <div id="recipeSummary">
-                            
-                            </div>    
+
+                            </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="#" class="card-footer-item">Change to another one!</a>
-
+                            <button class="button" id="recipeRandom">Show me something else!</button>
                         </footer>
                     </div>
                 </div>
@@ -119,21 +118,22 @@
                     </header>
 
                     <div class="card-image">
-                        <figure class="image is-4by3">
-                        <img id="movie-img" src="./Assets/movie.jpg" alt="Placeholder image">
+                        <figure id="movieImage" class="image is-4by3">
+                        
                         </figure>
                     </div>
 
                     <div class="card-content">
-                        <h3 id="movieName"></h3>
-                        <div id="movieInfo">
-     
+                        <div class="content">
+                            <h3 id="movieName"></h3>
+                            <div id="movieInfo">
+        
+                            </div>
                         </div>
                         <footer class="card-footer">
-                            <a href="#" class="card-footer-item">Change to another one!</a>
-
+                            <button class="button" id="movieRandom">Show me something else!</button>
                         </footer>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,28 +143,26 @@
 
         <div class="columns">
 
-            <div class="column is-one-third">
-                <div class="buttons">
-                    
-                    <button class="button is-success is-light">My favorate 1/title</button>
-                
-                </div>
+            <div id="drink-history" class="column is-one-third">
+
+                <button id="drink-1" class="button drink-button">Button</button>
+                <button id="drink-2" class="button drink-button">Button</button>
+                <button id="drink-3" class="button drink-button">Button</button>
+
             </div>
 
-            <div class="column is-one-third">
-                <div class="buttons">
-                    
-                    <button class="button is-success is-light">My favorate 2/title</button>
-                
-                </div>
+            <div id="recipe-history" class="column is-one-third">
+                <button id="recipe-1" class="button recipe-button">Button</button>
+                <button id="recipe-2" class="button recipe-button">Button</button>
+                <button id="recipe-3" class="button recipe-button">Button</button>
+
             </div>
 
-            <div class="column is-one-third">
-                <div class="buttons">
-                    
-                    <button class="button is-success is-light">My favorate 3/title</button>
-                
-                </div>
+            <div id="movie-history" class="column is-one-third">
+                <button id="movie-1" class="button movie-button">Button</button>
+                <button id="movie-2" class="button movie-button">Button</button>
+                <button id="movie-3" class="button movie-button">Button</button>
+
             </div>
         </div>
     </section>

@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+   drinkList = ["1", "2", "3"];
+   recipeList = ["a", "b", "c"];
+   movieList = ["Inception", "Matrix", "Friends"];
+
 $("#random-button").on("click", function(event) {
   event.preventDefault();
 
@@ -7,8 +11,19 @@ getDrink();
 
 getMovie();
 
-getRecipe()
+getRecipe();
 
+$("#movieRandom").on("click", function(event) {
+  getMovie();
+});
+
+$("#recipeRandom").on("click", function(event) {
+  getRecipe();
+});
+
+$("#drinkRandom").on("click", function(event) {
+  getDrink();
+});
 
 });
 
@@ -28,13 +43,14 @@ function getDrink () {
       
   }).then(function(drinkResponse) {
 
-      console.log(drinkResponse.drinks[0]);
-      var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb
-      $("#drinkImage").attr("src", drinkImageUrl)
+    console.log(drinkResponse.drinks[0]);
+    var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb
+    //$("#drinkImage").attr("src", drinkImageUrl)
+    $("#drinkImage").css("background-image", "url("+drinkImageUrl+")")
 
-      var drinkName = drinkResponse.drinks[0].strDrink
-      $("#drinkName").text(drinkName)
-      //var drinkInstruct = drinkResponse.drinks[0].strInstructions
+    var drinkName = drinkResponse.drinks[0].strDrink
+    $("#drinkName").text(drinkName)
+    //var drinkInstruct = drinkResponse.drinks[0].strInstructions
 
       ingredientHeader = $("<p>").text("Ingredients:")
       ingredientHeader.attr("id", "ingredientHeader")
@@ -43,7 +59,16 @@ function getDrink () {
       
       getDrinkIngredients(drinkResponse)
           
-          
+    var newDrink = $("<button>");
+    newDrink.addClass("button").text(drinkName);
+    $("#drink-history").append(newDrink);
+    $(".drink-button")
+      .first()
+      .remove();
+    drinkList.shift();
+    var drinkEl = { drinkNam: drinkName, drinkImg: drinkImageUrl, content: $("#ingredientHeader").text()};
+    drinkList.push(drinkEl);
+    localStorage.setItem("drinkHistory", JSON.stringify(drinkList));          
       
   });
 }
@@ -124,7 +149,8 @@ function getMovie() {
     
     $("#movieName").text(movie)
 
-    $("#movie-img").attr("src", poster)
+  
+    $("#movieImage").css("background-image", "url("+poster+")")
     
     ratingHeader = $("<p>").text("Rating:")
     ratingText = $("<p>").text(rating)
@@ -134,34 +160,15 @@ function getMovie() {
     
     $("#movieInfo").append(ratingHeader, ratingText, breakHTML, plotHeader, plotText)
 
+    var newMovie = $("<button>");
+    newMovie.addClass("button").text(movie);
+    $("#movie-history").append(newMovie);
+    $(".movie-button").first().remove();
+    movieList.shift();
+    var movieEl = {movNam: movie, movImg: poster, movRate: rating, movPlot: plot};
+    movieList.push(movieEl);
+    localStorage.setItem("movieHistory", JSON.stringify(movieList));
   })
-  
-  // var movieKey = "73c47b3bcb013637f6b5dec34d836076";
-
-  // //get latest movie id
-  // var maxMovieID = "";
-  // var latestMv =
-  //   "https://api.themoviedb.org/3/movie/latest?api_key=" + movieKey + "&language=en-US";
-  //  $.ajax({
-  //    url: latestMv,
-  //    method: "GET"
-  //  }).then(function(response) {
-  //     maxMovieID = response.id;   
-
-
-  // var movieID = Math.floor(Math.random() * maxMovieID);
-  // var queryURL = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + movieKey;
-  // $.ajax({
-  //   url: queryURL,
-  //   method: "GET"
-  // }).then(function(response) {
-  //   console.log(response);
-  //   $("#movie-text").text(response.overview);
-  //   var imgURL = "https://image.tmdb.org/t/p/original" + response.poster_path;
-  //   $("#movie-img").attr("src", imgURL);
-  // })
-    
-  // })
 }
 
 function getRecipe() {
@@ -182,10 +189,20 @@ function getRecipe() {
 
     summaryHTML = $("<p>").text(recipeSummary)
 
-    $("#recipeImage").attr("src", recipeImage)
+    $("#recipeImage").css("background-image", "url("+recipeImage+")")
     $("#recipeName").text(recipeName)
     $("#recipeSummary").append(recipeSummary)
 
+    var newRecipe = $("<button>");
+    newRecipe.addClass("button").text(recipeName);
+    $("#recipe-history").append(newRecipe);
+    $(".recipe-button")
+      .first()
+      .remove();
+    recipeList.shift();
+    var recipeEL = {reciImg: recipeImage,  reciNam: recipeName, reciSum: recipeSummary};
+    recipeList.push(recipeEL);
+    localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
   })
 
 }

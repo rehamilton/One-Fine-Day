@@ -39,3 +39,27 @@ p{
     font-family: 'Baloo Thambi 2', cursive;
     font-size: medium;
 }
+
+#movieImage {
+    background-image: url(../Assets/movie.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(214, 211, 211);
+}
+
+#recipeImage {
+    background-image: url(../Assets/food.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(214, 211, 211);
+}
+
+#drinkImage {
+    background-image: url(../Assets/drink.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(214, 211, 211);
+}
