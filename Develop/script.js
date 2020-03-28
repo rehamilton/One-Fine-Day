@@ -11,8 +11,19 @@ getDrink();
 
 getMovie();
 
-getRecipe()
+getRecipe();
 
+$("#movieRandom").on("click", function(event) {
+  getMovie();
+});
+
+$("#recipeRandom").on("click", function(event) {
+  getRecipe();
+});
+
+$("#drinkRandom").on("click", function(event) {
+  getDrink();
+});
 
 });
 
@@ -32,13 +43,14 @@ function getDrink () {
       
   }).then(function(drinkResponse) {
 
-      console.log(drinkResponse.drinks[0]);
-      var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb
-      $("#drinkImage").attr("src", drinkImageUrl)
+    console.log(drinkResponse.drinks[0]);
+    var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb
+    //$("#drinkImage").attr("src", drinkImageUrl)
+    $("#drinkImage").css("background-image", "url("+drinkImageUrl+")")
 
-      var drinkName = drinkResponse.drinks[0].strDrink
-      $("#drinkName").text(drinkName)
-      //var drinkInstruct = drinkResponse.drinks[0].strInstructions
+    var drinkName = drinkResponse.drinks[0].strDrink
+    $("#drinkName").text(drinkName)
+    //var drinkInstruct = drinkResponse.drinks[0].strInstructions
 
       ingredientHeader = $("<p>").text("Ingredients:")
       ingredientHeader.attr("id", "ingredientHeader")
@@ -137,7 +149,8 @@ function getMovie() {
     
     $("#movieName").text(movie)
 
-    $("#movie-img").attr("src", poster)
+  
+    $("#movieImage").css("background-image", "url("+poster+")")
     
     ratingHeader = $("<p>").text("Rating:")
     ratingText = $("<p>").text(rating)
@@ -176,7 +189,7 @@ function getRecipe() {
 
     summaryHTML = $("<p>").text(recipeSummary)
 
-    $("#recipeImage").attr("src", recipeImage)
+    $("#recipeImage").css("background-image", "url("+recipeImage+")")
     $("#recipeName").text(recipeName)
     $("#recipeSummary").append(recipeSummary)
 
