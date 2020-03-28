@@ -1,11 +1,43 @@
 h1,h2{
-    
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 3px 3px 3px black;
+    color: white !important;
+    font-family: 'Pacifico', cursive;
+
 }
+.title,.subtitle{
+    color: white !important;
+    font-family: 'Pacifico', cursive;
+    text-shadow: black !important;  
+}
+
 
 .button{
 width: 95%;
 margin-left: 1.5rem;
+}
+
+#random-button{
+    background-color: #506165!important;
+    color: white;
+    font-family: 'Baloo Thambi 2', cursive;
+    height: 4rem
+}    
+
+
+.hero {
+    background-image: url("photo2.jpg");
+    background-size: cover;
+    padding-bottom: 3rem;
+    background-position: center;
+}
+
+body{
+    background-color:#eeedf2;
+}
+
+p{
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: medium;
 }
 
 #movieImage {
