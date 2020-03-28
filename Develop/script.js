@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+   drinkList = ["1", "2", "3"];
+   recipeList = ["a", "b", "c"];
+   movieList = ["Inception", "Matrix", "Friends"];
+
 $("#random-button").on("click", function(event) {
   event.preventDefault();
 
@@ -43,7 +47,16 @@ function getDrink () {
       
       getDrinkIngredients(drinkResponse)
           
-          
+    var newDrink = $("<button>");
+    newDrink.addClass("button").text(drinkName);
+    $("#drink-history").append(newDrink);
+    $(".drink-button")
+      .first()
+      .remove();
+    drinkList.shift();
+    var drinkEl = { drinkNam: drinkName, drinkImg: drinkImageUrl, content: $("#ingredientHeader").text()};
+    drinkList.push(drinkEl);
+    localStorage.setItem("drinkHistory", JSON.stringify(drinkList));          
       
   });
 }
@@ -134,6 +147,14 @@ function getMovie() {
     
     $("#movieInfo").append(ratingHeader, ratingText, breakHTML, plotHeader, plotText)
 
+    var newMovie = $("<button>");
+    newMovie.addClass("button").text(movie);
+    $("#movie-history").append(newMovie);
+    $(".movie-button").first().remove();
+    movieList.shift();
+    var movieEl = {movNam: movie, movImg: poster, movRate: rating, movPlot: plot};
+    movieList.push(movieEl);
+    localStorage.setItem("movieHistory", JSON.stringify(movieList));
   })
 }
 
@@ -159,6 +180,16 @@ function getRecipe() {
     $("#recipeName").text(recipeName)
     $("#recipeSummary").append(recipeSummary)
 
+    var newRecipe = $("<button>");
+    newRecipe.addClass("button").text(recipeName);
+    $("#recipe-history").append(newRecipe);
+    $(".recipe-button")
+      .first()
+      .remove();
+    recipeList.shift();
+    var recipeEL = {reciImg: recipeImage,  reciNam: recipeName, reciSum: recipeSummary};
+    recipeList.push(recipeEL);
+    localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
   })
 
 }
