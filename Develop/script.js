@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  drinkList = ["", "", ""];
-  recipeList = ["", "", ""];
-  movieList = ["", "", ""];
+  drinkList = ["drink 1", "drink 2", "drink 3"];
+  recipeList = ["recipe 1", "recipe 2", "recipe 3"];
+  movieList = ["Movie 1", "Movie 2", "Movie 3"];
   init();
 
   $("#random-button").on("click", function(event) {
@@ -24,6 +24,52 @@ $(document).ready(function() {
 
   $("#movieRandom").on("click", function() {
     getMovie();
+  });
+
+  //click on any drink buttons to display content
+  $("#drink-history").on("click", function(event) {
+    event.preventDefault();
+    var drinkIndex = drinkList.findIndex(
+      i => i.drinkNam === event.target.innerHTML
+    );
+    var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
+    $("#drinkImage").css(
+      "background-image",
+      "url(" + drinkHistory[drinkIndex].drinkImg + ")"
+    );
+    $("#drinkName").text(drinkHistory[drinkIndex].drinkNam);
+    $("#ingredients").text(drinkHistory[drinkIndex].content);
+  });
+
+  //click on any recipe buttons to display content
+  $("#recipe-history").on("click", function(event) {
+    event.preventDefault();
+    var reciIndex = recipeList.findIndex(
+      i => i.reciNam === event.target.innerHTML
+    );
+    var recipeHistory = JSON.parse(localStorage.getItem("recipeHistory"));
+    $("#recipeImage").css(
+      "background-image",
+      "url(" + recipeHistory[reciIndex].reciImg + ")"
+    );
+    $("#recipeName").text(recipeHistory[reciIndex].reciNam);
+    $("#recipeSummary").text(recipeHistory[reciIndex].reciSum);
+  });
+
+  //click on any movie buttons to display content
+  $("#movie-history").on("click", function(event) {
+    event.preventDefault();
+    var movIndex = movieList.findIndex(
+      i => i.movNam === event.target.innerHTML
+    );
+    var movHistory = JSON.parse(localStorage.getItem("movieHistory"));
+    $("#movieImage").css(
+      "background-image",
+      "url(" + movHistory[movIndex].movImg + ")"
+    );
+    $("#movieName").text(movHistory[movIndex].movNam);
+    $("#movieInfo").text(movHistory[movIndex].movRate);
+    $("#movieInfo").append($("<p>").text(movHistory[movIndex].movPlot));
   });
 
   //function to get random drink
@@ -210,8 +256,6 @@ function getMovie() {
       movPlot: plot
     };
     movieList.push(movieEl);
-    console.log(movieEl);
-    console.log(movieList);
     localStorage.setItem("movieHistory", JSON.stringify(movieList));
   });
 }
@@ -219,16 +263,37 @@ function getMovie() {
 function init() {
   //keep last three random history
   var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
+  if (drinkHistory == null) {
+    localStorage.setItem("drinkHistory", JSON.stringify(drinkList));
+    for (var i = 0; i < drinkList.length; i++) {
+      $("#drink-" + i).text(drinkList[i]);
+    }
+  } //handle first time use
+  drinkList = drinkHistory;
   for (var i = 0; i < drinkHistory.length; i++) {
     $("#drink-" + i).text(drinkHistory[i].drinkNam);
   }
 
   var recipeHistory = JSON.parse(localStorage.getItem("recipeHistory"));
+  if (recipeHistory == null) {
+    localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
+    for (var i = 0; i < recipeList.length; i++) {
+      $("#recipe-" + i).text(recipeList[i]);
+    }
+  } //handle first time use
+  recipeList = recipeHistory;
   for (var i = 0; i < recipeHistory.length; i++) {
     $("#recipe-" + i).text(recipeHistory[i].reciNam);
   }
 
   var movHistory = JSON.parse(localStorage.getItem("movieHistory"));
+  if (movHistory == null) {
+    localStorage.setItem("movieHistory", JSON.stringify(movieList));
+    for (var i = 0; i < movieList.length; i++) {
+      $("#movie-" + i).text(movieList[i]);
+    }
+  } //handle first time use
+  movieList = movHistory;
   for (var i = 0; i < movHistory.length; i++) {
     $("#movie-" + i).text(movHistory[i].movNam);
   }
