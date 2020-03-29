@@ -86,12 +86,10 @@ $(document).ready(function() {
     }).then(function(drinkResponse) {
       console.log(drinkResponse.drinks[0]);
       var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb;
-      //$("#drinkImage").attr("src", drinkImageUrl)
       $("#drinkImage").css("background-image", "url(" + drinkImageUrl + ")");
 
       var drinkName = drinkResponse.drinks[0].strDrink;
       $("#drinkName").text(drinkName);
-      //var drinkInstruct = drinkResponse.drinks[0].strInstructions
 
       ingredientHeader = $("<p>").text("Ingredients:");
       ingredientHeader.attr("id", "ingredientHeader");
@@ -134,6 +132,10 @@ $(document).ready(function() {
       measureIndexArray.push(measureIndex);
     }
 
+    ingredientHead = $("<p>").text("Ingredients:")
+    ingredientHead.attr("class","has-text-weight-bold")
+    $("#ingredientHeader").append(ingredientHead);
+
     for (i = 0; i < ingredientIndexArray.length; i++) {
       //console.log(ingredientIndexArray[i]);
       var ingredientNo = ingredientIndexArray[i];
@@ -143,12 +145,16 @@ $(document).ready(function() {
       //console.log(ingredientNo);
       //console.log(ingredient);
 
+
       if (ingredient != null) {
+        
         ingredientHTML = $("<p>").text(ingredient + " - " + measure);
         ingredientHTML.attr("id", [i]);
         $("#ingredientHeader").append(ingredientHTML);
       }
     }
+
+    $("#ingredientHeader").append("<br>")
 
     getDrinkInstructions(drinkResponse);
   }
@@ -160,8 +166,8 @@ $(document).ready(function() {
     instructionHeader = $("<p>").text("Instructions:");
     instructionText = $("<p>").text(instruction);
 
-    instructionHeader.append(instructionText);
-    $("#ingredientHeader").append(instructionHeader);
+    instructionHeader.attr("class", "has-text-weight-bold")
+    $("#ingredientHeader").append(instructionHeader, instructionText);
   }
 
   function getRecipe() {
@@ -227,8 +233,10 @@ $(document).ready(function() {
       $("#movieImage").css("background-image", "url(" + poster + ")");
 
       ratingHeader = $("<p>").text("Rating:");
+      ratingHeader.attr("class", "has-text-weight-bold")
       ratingText = $("<p>").text(rating);
       plotHeader = $("<p>").text("Plot:");
+      plotHeader.attr("class", "has-text-weight-bold")
       plotText = $("<p>").text(plot);
       breakHTML = $("<br>");
 
