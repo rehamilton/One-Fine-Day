@@ -1,11 +1,55 @@
 h1,h2{
-    
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 3px 3px 3px black;
+    color: white !important;
+    font-family: 'Pacifico', cursive;
+
+}
+.title,.subtitle{
+    color: white !important;
+    font-family: 'Pacifico', cursive;
+    text-shadow: black !important;  
 }
 
 .button{
-width: 95%;
-margin-left: 1.5rem;
+    width: 100%;
+    font-family: 'Baloo Thambi 2', cursive;
+    background-color:#d6d3d3 !important;
+}
+
+#drinkRandom, #recipeRandom, #movieRandom{
+
+    background-color:#506165!important;
+    color: white !important;
+    font-family: 'Baloo Thambi 2', cursive;
+    width: 100%;
+    
+
+}
+
+#random-button{
+    background-color: #506165!important;
+    color: white;
+    font-family: 'Baloo Thambi 2', cursive;
+    height: 4rem;
+    width: 95%;
+    margin-left: 1.5rem;
+}    
+
+
+.hero {
+    background-image: url("photo2.jpg");
+    background-size: cover;
+    padding-bottom: 3rem;
+    background-position: center;
+}
+
+body{
+    background-color:#eeedf2;
+}
+
+p{
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: medium;
 }
 
 #movieImage {
@@ -13,7 +57,7 @@ margin-left: 1.5rem;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgb(214, 211, 211);
+    background-color: #d6d3d3;
 }
 
 #recipeImage {
@@ -21,7 +65,7 @@ margin-left: 1.5rem;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgb(214, 211, 211);
+    background-color:#d6d3d3;
 }
 
 #drinkImage {
@@ -29,5 +73,9 @@ margin-left: 1.5rem;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgb(214, 211, 211);
+    background-color: #d6d3d3;
+}
+
+.card{
+    background-color:  #d6d3d3 !important;
 }

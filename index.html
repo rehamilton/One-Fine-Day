@@ -5,39 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>One-Fine-Day</title>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2|Chilanka|Kalam|Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Develop/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./Develop/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/umbrellajs Github"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
-    <section class="section">
-       
-            <section class="hero is-primary is-medium is-bold">
+    
+
+            <section class="hero is-medium is-bold "  >
+
                 <div class="hero-body">
-                    <div class="container has-text-centered">
-                        <h1 class="title is-large">
-                            One Fine Day
+                    <div class="container has-text-centered title1" >
+                        <h1 class="title is-spaced is-1 ">
+                            One  Fine  Day
                         </h1>
-                        <h2 class="subtitle">
+                        <h2 class="subtitle is-3 ">
                             EAT DRINK WATCH
                         </h2>
                     </div>
+                    
                 </div>
+                 
             </section>
            
-    </section>
+    
 
     <div class="intro column is-8 is-offset-2 has-text-centered">
-        <h2 class="title">
-            Feel bored at home ? Luckily you find me!</h2><br>
-        <p class="subtitle">Choose your favourite DRINK, RECIPE and MOVIE !</p>
+        <p>
+            Feel bored at home ? Luckily you find me!
+        Choose your favourite DRINK, RECEIPE and MOVIE !</p>
     </div>
-  
+
 
 
 
@@ -50,7 +54,7 @@
             <div class="column is-one-third">
                 <div class="card">
                     <header class="card-header">
-                        <p class="card-header-title">
+                        <p class="card-header-title is-centered">
                             DRINK
                         </p>
                     </header>
@@ -65,7 +69,7 @@
                         <div class="content">
                             <h3 id="drinkName"></h3>
                             <div id="ingredients">
-                                
+
                             </div>
                             <footer class="card-footer">
                                 <button class="button" id="drinkRandom">Show me something else!</button>
@@ -78,7 +82,7 @@
             <div class="column is-one-third">
                 <div class="card">
                     <header class="card-header">
-                        <p class="card-header-title">
+                        <p class="card-header-title is-centered">
                             MEAL RECIPE
                         </p>
                     </header>
@@ -93,8 +97,8 @@
                         <div class="content">
                             <h3 id="recipeName"></h3>
                             <div id="recipeSummary">
-                            
-                            </div>    
+
+                            </div>
                         </div>
                         <footer class="card-footer">
                             <button class="button" id="recipeRandom">Show me something else!</button>
@@ -107,7 +111,7 @@
             <div class="column is-one-third">
                 <div class="card">
                     <header class="card-header">
-                        <p class="card-header-title">
+                        <p class="card-header-title is-centered">
                             MOVIE
                         </p>
                     </header>
@@ -128,7 +132,7 @@
                         <footer class="card-footer">
                             <button class="button" id="movieRandom">Show me something else!</button>
                         </footer>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,28 +142,26 @@
 
         <div class="columns">
 
-            <div class="column is-one-third">
-                <div class="buttons">
-                    
-                    <button class="button is-success is-light">My favorate 1/title</button>
-                
-                </div>
+            <div id="drink-history" class="column is-one-third">
+
+                <button id="drink-1" class="button drink-button">Drink 1</button>
+                <button id="drink-2" class="button drink-button">Drink 2</button>
+                <button id="drink-3" class="button drink-button">Drink 3</button>
+
             </div>
 
-            <div class="column is-one-third">
-                <div class="buttons">
-                    
-                    <button class="button is-success is-light">My favorate 2/title</button>
-                
-                </div>
+            <div id="recipe-history" class="column is-one-third">
+                <button id="recipe-1" class="button recipe-button">Meal 1</button>
+                <button id="recipe-2" class="button recipe-button">Meal 2</button>
+                <button id="recipe-3" class="button recipe-button">Meal 3</button>
+
             </div>
 
-            <div class="column is-one-third">
-                <div class="buttons">
-                    
-                    <button class="button is-success is-light">My favorate 3/title</button>
-                
-                </div>
+            <div id="movie-history" class="column is-one-third">
+                <button id="movie-1" class="button movie-button">Movie 1</button>
+                <button id="movie-2" class="button movie-button">Movie 2</button>
+                <button id="movie-3" class="button movie-button">Movie 3</button>
+
             </div>
         </div>
     </section>
