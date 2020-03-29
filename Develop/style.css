@@ -1,11 +1,13 @@
-h1 h2 {
+h1,
+h2 {
     text-shadow: 3px 3px 3px black;
     color: white !important;
     font-family: 'Pacifico', cursive;
 
 }
 
-.title .subtitle {
+.title,
+.subtitle {
     color: white !important;
     font-family: 'Pacifico', cursive;
     text-shadow: black !important;
@@ -20,7 +22,9 @@ h1 h2 {
     word-break: normal;
 }
 
-#drinkRandom #recipeRandom #movieRandom {
+#drinkRandom,
+#recipeRandom,
+#movieRandom {
 
     background-color: #506165 !important;
     color: white !important;
@@ -82,5 +86,4 @@ p {
 
 .card {
     background-color: #d6d3d3 !important;
-    height: 100%;
 }
