@@ -38,7 +38,7 @@ $(document).ready(function() {
       "url(" + drinkHistory[drinkIndex].drinkImg + ")"
     );
     $("#drinkName").text(drinkHistory[drinkIndex].drinkNam);
-    $("#ingredients").text(drinkHistory[drinkIndex].content);
+    $("#ingredients").html(drinkHistory[drinkIndex].content);
   });
 
   //click on any recipe buttons to display content
@@ -53,7 +53,7 @@ $(document).ready(function() {
       "url(" + recipeHistory[reciIndex].reciImg + ")"
     );
     $("#recipeName").text(recipeHistory[reciIndex].reciNam);
-    $("#recipeSummary").text(recipeHistory[reciIndex].reciSum);
+    $("#recipeSummary").append(recipeHistory[reciIndex].reciSum);
   });
 
   //click on any movie buttons to display content
@@ -68,8 +68,21 @@ $(document).ready(function() {
       "url(" + movHistory[movIndex].movImg + ")"
     );
     $("#movieName").text(movHistory[movIndex].movNam);
-    $("#movieInfo").text(movHistory[movIndex].movRate);
-    $("#movieInfo").append($("<p>").text(movHistory[movIndex].movPlot));
+    ratingHeader = $("<p>").text("Rating:");
+    ratingHeader.attr("class", "has-text-weight-bold");
+    ratingText = $("<p>").text(movHistory[movIndex].movRate);
+    plotHeader = $("<p>").text("Plot:");
+    plotHeader.attr("class", "has-text-weight-bold");
+    plotText = $("<p>").text(movHistory[movIndex].movPlot);
+    breakHTML = $("<br>");
+
+    $("#movieInfo").append(
+      ratingHeader,
+      ratingText,
+      breakHTML,
+      plotHeader,
+      plotText
+    );
   });
 
   //function to get random drink
@@ -109,7 +122,7 @@ $(document).ready(function() {
       var drinkEl = {
         drinkNam: drinkName,
         drinkImg: drinkImageUrl,
-        content: $("#ingredientHeader").text()
+        content: $("#ingredients").contents()
       };
       drinkList.push(drinkEl);
       localStorage.setItem("drinkHistory", JSON.stringify(drinkList));
@@ -132,8 +145,8 @@ $(document).ready(function() {
       measureIndexArray.push(measureIndex);
     }
 
-    ingredientHead = $("<p>").text("Ingredients:")
-    ingredientHead.attr("class","has-text-weight-bold")
+    ingredientHead = $("<p>").text("Ingredients:");
+    ingredientHead.attr("class", "has-text-weight-bold");
     $("#ingredientHeader").append(ingredientHead);
 
     for (i = 0; i < ingredientIndexArray.length; i++) {
@@ -145,16 +158,14 @@ $(document).ready(function() {
       //console.log(ingredientNo);
       //console.log(ingredient);
 
-
       if (ingredient != null) {
-        
         ingredientHTML = $("<p>").text(ingredient + " - " + measure);
         ingredientHTML.attr("id", [i]);
         $("#ingredientHeader").append(ingredientHTML);
       }
     }
 
-    $("#ingredientHeader").append("<br>")
+    $("#ingredientHeader").append("<br>");
 
     getDrinkInstructions(drinkResponse);
   }
@@ -166,7 +177,7 @@ $(document).ready(function() {
     instructionHeader = $("<p>").text("Instructions:");
     instructionText = $("<p>").text(instruction);
 
-    instructionHeader.attr("class", "has-text-weight-bold")
+    instructionHeader.attr("class", "has-text-weight-bold");
     $("#ingredientHeader").append(instructionHeader, instructionText);
   }
 
@@ -233,10 +244,10 @@ $(document).ready(function() {
       $("#movieImage").css("background-image", "url(" + poster + ")");
 
       ratingHeader = $("<p>").text("Rating:");
-      ratingHeader.attr("class", "has-text-weight-bold")
+      ratingHeader.attr("class", "has-text-weight-bold");
       ratingText = $("<p>").text(rating);
       plotHeader = $("<p>").text("Plot:");
-      plotHeader.attr("class", "has-text-weight-bold")
+      plotHeader.attr("class", "has-text-weight-bold");
       plotText = $("<p>").text(plot);
       breakHTML = $("<br>");
 
