@@ -164,7 +164,7 @@ $(document).ready(function() {
     console.log(instruction);
 
     instructionHeader = $("<p>").text("Instructions:");
-    instructionText = $("<p>").text(instruction);
+    instructionText = $("<div>").text(instruction);
 
     instructionHeader.attr("class", "has-text-weight-bold")
     $("#ingredientHeader").append(instructionHeader, instructionText);
@@ -183,13 +183,18 @@ $(document).ready(function() {
       console.log(recipeResponse.recipes[0]);
       var recipeImage = recipeResponse.recipes[0].image;
       var recipeName = recipeResponse.recipes[0].title;
-      var recipeSummary = recipeResponse.recipes[0].summary;
+      var recipeReady = recipeResponse.recipes[0].readyInMinutes;
+      var recipeServe = recipeResponse.recipes[0].servings;
+      var recipeLink = recipeResponse.recipes[0].sourceUrl;
 
-      summaryHTML = $("<p>").text(recipeSummary);
+      recipeReadyHTML = $("<p>").text("Ready in " + recipeReady + " minutes");
+      recipeServeHTML = $("<p>").text("Serves " + recipeServe + " people");
+      recipeLinkHTML = $("<a>").text("Click here for recipe");
+      recipeLinkHTML.attr("href", recipeLink);
 
       $("#recipeImage").css("background-image", "url(" + recipeImage + ")");
       $("#recipeName").text(recipeName);
-      $("#recipeSummary").append(recipeSummary);
+      $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
 
       //render recipe history buttons
       var newRecipe = $("<button>");
@@ -202,7 +207,10 @@ $(document).ready(function() {
       var recipeEL = {
         reciImg: recipeImage,
         reciNam: recipeName,
-        reciSum: recipeSummary
+        reciRea: recipeReady,
+        reciSer: recipeServe,
+        reciLin: recipeLink,
+        ReciCre: recipeCredit
       };
       recipeList.push(recipeEL);
       localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
