@@ -4,6 +4,7 @@ $(document).ready(function() {
   movieList = ["Movie 1", "Movie 2", "Movie 3"];
   init();
 
+  //get random items when button is clicked. 
   $("#random-button").on("click", function(event) {
     event.preventDefault();
 
@@ -12,70 +13,87 @@ $(document).ready(function() {
     getMovie();
 
     getRecipe();
-  });
+  
 
-  $("#drinkRandom").on("click", function() {
-    getDrink();
-  });
+    $("#drinkRandom").on("click", function() {
+      getDrink();
+    });
 
-  $("#recipeRandom").on("click", function() {
-    getRecipe();
-  });
+    $("#recipeRandom").on("click", function() {
+      getRecipe();
+    });
 
-  $("#movieRandom").on("click", function() {
-    getMovie();
+    $("#movieRandom").on("click", function() {
+      getMovie();
+    });
+
   });
 
   //click on any drink buttons to display content
   $("#drink-history").on("click", function(event) {
     event.preventDefault();
+    $("#ingredients").empty();
+    
     var drinkIndex = drinkList.findIndex(
       i => i.drinkNam === event.target.innerHTML
     );
     var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
+    
     $("#drinkImage").css(
       "background-image",
       "url(" + drinkHistory[drinkIndex].drinkImg + ")"
     );
     $("#drinkName").text(drinkHistory[drinkIndex].drinkNam);
-    $("#ingredientHeader").empty();
+    $("#ingredients").empty();
 
     ingredientHead = $("<p>").text("Ingredients:");
     ingredientHead.attr("class", "has-text-weight-bold");
-    $("#ingredientHeader").append(ingredientHead);
+    $("#ingredients").append(ingredientHead);
+
 
     for (i = 0; i < drinkHistory[drinkIndex].ingredients.length; i++) {
       ingredientHTML = $("<p>").text(drinkHistory[drinkIndex].ingredients[i]);
       ingredientHTML.attr("id", [i]);
-      $("#ingredientHeader").append(ingredientHTML);
+      $("#ingredients").append(ingredientHTML);
     }
 
-    $("#ingredientHeader").append("<br>");
+    $("#ingredients").append("<br>");
     instructionHeader = $("<p>").text("Instructions:");
     instructionText = $("<p>").text(drinkHistory[drinkIndex].instruction);
     instructionText.attr("id", "instruction");
     instructionHeader.attr("class", "has-text-weight-bold");
-    $("#ingredientHeader").append(instructionHeader, instructionText);
+    $("#ingredients").append(instructionHeader, instructionText);
   });
 
   //click on any recipe buttons to display content
   $("#recipe-history").on("click", function(event) {
     event.preventDefault();
+    $("#recipeSummary").empty();
     var reciIndex = recipeList.findIndex(
       i => i.reciNam === event.target.innerHTML
     );
     var recipeHistory = JSON.parse(localStorage.getItem("recipeHistory"));
+    recipeReadyHTML = $("<p>").text("Ready in " + recipeHistory[reciIndex].reciRea + " minutes");
+    recipeServeHTML = $("<p>").text("Serves " + recipeHistory[reciIndex].reciSer + " people");
+    recipeLinkHTML = $("<a>").text("Click here for recipe");
+    recipeLinkHTML.attr("href",recipeHistory[reciIndex].reciLin);
+
     $("#recipeImage").css(
       "background-image",
       "url(" + recipeHistory[reciIndex].reciImg + ")"
-    );
+      );
     $("#recipeName").text(recipeHistory[reciIndex].reciNam);
     $("#recipeSummary").append(recipeHistory[reciIndex].reciSum);
+    $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
+
   });
 
   //click on any movie buttons to display content
   $("#movie-history").on("click", function(event) {
     event.preventDefault();
+
+    $("#movieInfo").empty();
+
     var movIndex = movieList.findIndex(
       i => i.movNam === event.target.innerHTML
     );
@@ -114,7 +132,7 @@ $(document).ready(function() {
 
       //on error show apologies and have a drink on us (use stored image)
     }).then(function(drinkResponse) {
-      console.log(drinkResponse.drinks[0]);
+      //console.log(drinkResponse.drinks[0]);
       var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb;
       $("#drinkImage").css("background-image", "url(" + drinkImageUrl + ")");
 
@@ -148,7 +166,7 @@ $(document).ready(function() {
         instruction: $("#instruction").text(),
         ingredients: ingredients
       };
-      console.log(drinkEl.content);
+      //console.log(drinkEl.content);
       drinkList.push(drinkEl);
       localStorage.setItem("drinkHistory", JSON.stringify(drinkList));
     });
@@ -175,15 +193,14 @@ $(document).ready(function() {
     $("#ingredientHeader").append(ingredientHead);
 
     for (i = 0; i < ingredientIndexArray.length; i++) {
-      //console.log(ingredientIndexArray[i]);
+      
       var ingredientNo = ingredientIndexArray[i];
       var ingredient = drinkResponse.drinks[0][ingredientNo];
       var measureNo = measureIndexArray[i];
       var measure = drinkResponse.drinks[0][measureNo];
-      //console.log(ingredientNo);
-      //console.log(ingredient);
+     
 
-      if (ingredient != null) {
+      if (ingredient != null && ingredient != "-") {
         ingredientHTML = $("<p>").text(ingredient + " - " + measure);
         ingredientHTML.attr("id", [i]);
         $("#ingredientHeader").append(ingredientHTML);
@@ -197,7 +214,7 @@ $(document).ready(function() {
 
   function getDrinkInstructions(drinkResponse) {
     var instruction = drinkResponse.drinks[0].strInstructions;
-    console.log(instruction);
+    //console.log(instruction);
 
     instructionHeader = $("<p>").text("Instructions:");
     instructionText = $("<p>").text(instruction);
@@ -216,16 +233,21 @@ $(document).ready(function() {
       url: recipeUrl,
       method: "GET"
     }).then(function(recipeResponse) {
-      console.log(recipeResponse.recipes[0]);
+      //console.log(recipeResponse.recipes[0]);
       var recipeImage = recipeResponse.recipes[0].image;
       var recipeName = recipeResponse.recipes[0].title;
-      var recipeSummary = recipeResponse.recipes[0].summary;
+      var recipeReady = recipeResponse.recipes[0].readyInMinutes;
+      var recipeServe = recipeResponse.recipes[0].servings;
+      var recipeLink = recipeResponse.recipes[0].sourceUrl;
 
-      summaryHTML = $("<p>").text(recipeSummary);
+      recipeReadyHTML = $("<p>").text("Ready in " + recipeReady + " minutes");
+      recipeServeHTML = $("<p>").text("Serves " + recipeServe + " people");
+      recipeLinkHTML = $("<a>").text("Click here for recipe");
+      recipeLinkHTML.attr("href", recipeLink);
 
       $("#recipeImage").css("background-image", "url(" + recipeImage + ")");
       $("#recipeName").text(recipeName);
-      $("#recipeSummary").append(recipeSummary);
+      $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
 
       //render recipe history buttons
       var newRecipe = $("<button>");
@@ -238,7 +260,9 @@ $(document).ready(function() {
       var recipeEL = {
         reciImg: recipeImage,
         reciNam: recipeName,
-        reciSum: recipeSummary
+        reciRea: recipeReady,
+        reciSer: recipeServe,
+        reciLin: recipeLink,
       };
       recipeList.push(recipeEL);
       localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
@@ -256,7 +280,7 @@ $(document).ready(function() {
       method: "GET"
     }).then(function(movieResponse) {
       var movieID = Math.floor(Math.random() * 19);
-      console.log(movieResponse.results[movieID]);
+      //console.log(movieResponse.results[movieID]);
       var movie = movieResponse.results[movieID].title;
       var poster =
         "https://image.tmdb.org/t/p/original" +
@@ -303,6 +327,7 @@ $(document).ready(function() {
     });
   }
 
+  //retrieve local storage
   function init() {
     //keep last three random history
     var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
