@@ -5,14 +5,18 @@ h2 {
     font-family: 'Pacifico', cursive;
 
 }
-#intro{
+
+#intro {
     font-size: large;
 }
-.intro{
+
+.intro {
     margin-bottom: 2%;
     margin-top: 2%;
 }
-.title,.subtitle{
+
+.title,
+.subtitle {
     color: white !important;
     font-family: 'Pacifico', cursive;
     text-shadow: black !important;
@@ -46,11 +50,11 @@ h2 {
     width: 95%;
 
     margin-left: 2%;
-}    
+}
 
 
 .hero {
-    background-image: url("photo2.jpg");
+    background-image: url(../Assets/photo2.jpg);
     background-size: cover;
     padding-bottom: 3rem;
     background-position: center;
@@ -90,13 +94,14 @@ p {
 }
 
 
-.card{
-    background-color:  #d6d3d3 !important;
+.card {
+    background-color: #d6d3d3 !important;
 }
-.card-content{
+
+.card-content {
     font-family: 'Baloo Thambi 2', cursive;
     font-size: medium;
-    
+
 }
 
 
@@ -105,26 +110,30 @@ p {
     display: flex;
     flex-direction: column;
     height: 100%;
- }
- .card-equal-height .card-footer {
-   margin-top: auto;
- }
- .card{
-    
-     border-radius: 0.5rem;
- }
- .card img{
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19);
-     border-radius: 0.5rem;
-     max-width: 96.5%;
-     max-height: 96.5%;
-     margin: 0 auto;
-     margin-top: -3.5%;
- }
- .content{
-     height: 100%;
- }
+}
 
- p {
-     margin-bottom: 0px !important;
- }
+.card-equal-height .card-footer {
+    margin-top: auto;
+}
+
+.card {
+
+    border-radius: 0.5rem;
+}
+
+.card img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0.5rem;
+    max-width: 96.5%;
+    max-height: 96.5%;
+    margin: 0 auto;
+    margin-top: -3.5%;
+}
+
+.content {
+    height: 100%;
+}
+
+p {
+    margin-bottom: 0px !important;
+}

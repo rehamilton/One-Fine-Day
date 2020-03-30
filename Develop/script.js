@@ -26,7 +26,6 @@ $(document).ready(function() {
     $("#movieRandom").on("click", function() {
       getMovie();
     });
-
   });
 
   //click on any drink buttons to display content
@@ -89,17 +88,24 @@ $(document).ready(function() {
     recipeReadyHTML = $("<p>").text("Ready in " + recipeHistory[reciIndex].reciRea + " minutes");
     recipeServeHTML = $("<p>").text("Serves " + recipeHistory[reciIndex].reciSer + " people");
     recipeLinkHTML = $("<a>").text("Click here for recipe");
-    recipeLinkHTML.attr("href",recipeHistory[reciIndex].reciLin);
+    recipeLinkHTML.attr("href", recipeHistory[reciIndex].reciLin);
 
     //append new HTML and responses to existing HTML
     $("#recipeImage").css(
       "background-image",
       "url(" + recipeHistory[reciIndex].reciImg + ")"
-      );
+    );
     $("#recipeName").text(recipeHistory[reciIndex].reciNam);
     $("#recipeSummary").append(recipeHistory[reciIndex].reciSum);
-    $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
-
+    $("#recipeSummary").append(
+      recipeReadyHTML,
+      "<br>",
+      recipeServeHTML,
+      "<br>",
+      recipeLinkHTML,
+      "<br>",
+      "<br>"
+    );
   });
 
   //click on any movie buttons to display content
@@ -225,7 +231,6 @@ $(document).ready(function() {
 
     //go through the new array and get responses 
     for (i = 0; i < ingredientIndexArray.length; i++) {
-      
       var ingredientNo = ingredientIndexArray[i];
       var ingredient = drinkResponse.drinks[0][ingredientNo];
       var measureNo = measureIndexArray[i];
@@ -289,7 +294,15 @@ $(document).ready(function() {
       //place responses and new HTML into existing HTML
       $("#recipeImage").css("background-image", "url(" + recipeImage + ")");
       $("#recipeName").text(recipeName);
-      $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
+      $("#recipeSummary").append(
+        recipeReadyHTML,
+        "<br>",
+        recipeServeHTML,
+        "<br>",
+        recipeLinkHTML,
+        "<br>",
+        "<br>"
+      );
 
       //render recipe history buttons
       var newRecipe = $("<button>");
@@ -306,7 +319,7 @@ $(document).ready(function() {
         reciNam: recipeName,
         reciRea: recipeReady,
         reciSer: recipeServe,
-        reciLin: recipeLink,
+        reciLin: recipeLink
       };
 
       //push new object to local storage

@@ -1,9 +1,5 @@
 # Project Title: One Fine Day
 
-## Milestone
-
-Project presentation by 30/03/2020
-
 ## Overview
 
 Create an app that provide user a range of choices on drink, recipe and movie.\
@@ -23,45 +19,20 @@ So I can make choice on how to spend my "One Fine Day"!
 ## Acceptance Criteria
 
 GIVEN the web open\
-WHEN I click "Random" button\
+WHEN I click on "Click me for some ideas!" button\
 THEN drink, recipe and movie cards will be updated with random content\
-WHEN I click "Hold" button at any card\
-THEN the hold card content won't change\
-WHEN I click "preset" button\
+WHEN I click on "show me something else!" button at any card\
+THEN only the selected card content will be updated with random content\
+WHEN I click on the history buttons below card\
 THEN the three choices will saved as user preference and display in the card content
 
-## Wire Frame
-
-![mockup](./Assets/wireframe.png)
+![screenshot](Assets/One-Fine-Day-screenshot.png)
 
 ## API used
 
-BreweryDB <https://www.brewerydb.com>\
+thecocktaildb <https://www.thecocktaildb.com/api>\
 spoonacular <https://spoonacular.com>\
-OMDB <https://www.omdbapi.com>
-
-## Task Breakdown
-
-Brainstorming initial concept (mvp)\
-Research API and get keys\
-test keys to ensure they provide the right info\
-review and choose css framework\
-Basic HTML\
-style html\
-test keys\
-write script\
-test script\
-test full website\
-end user testing\
-move mvp to production\
-Recipe's and beers (add on if mvp goes well)\
-add option for recipe's and drink suggestions if user wants to stay in\
-add html\
-style html\
-write script\
-test script and website\
-end user testing\
-move second stage to production
+TMDB <https://www.themoviedb.org/documentation/api>
 
 ## Application Requirements
 
