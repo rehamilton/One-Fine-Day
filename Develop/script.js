@@ -4,7 +4,7 @@ $(document).ready(function() {
   movieList = ["Movie 1", "Movie 2", "Movie 3"];
   init();
 
-  //get random items when button is clicked. 
+  //get random items when button is clicked.
   $("#random-button").on("click", function(event) {
     event.preventDefault();
 
@@ -13,7 +13,6 @@ $(document).ready(function() {
     getMovie();
 
     getRecipe();
-  
 
     $("#drinkRandom").on("click", function() {
       getDrink();
@@ -26,19 +25,18 @@ $(document).ready(function() {
     $("#movieRandom").on("click", function() {
       getMovie();
     });
-
   });
 
   //click on any drink buttons to display content
   $("#drink-history").on("click", function(event) {
     event.preventDefault();
     $("#ingredients").empty();
-    
+
     var drinkIndex = drinkList.findIndex(
       i => i.drinkNam === event.target.innerHTML
     );
     var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
-    
+
     $("#drinkImage").css(
       "background-image",
       "url(" + drinkHistory[drinkIndex].drinkImg + ")"
@@ -49,7 +47,6 @@ $(document).ready(function() {
     ingredientHead = $("<p>").text("Ingredients:");
     ingredientHead.attr("class", "has-text-weight-bold");
     $("#ingredients").append(ingredientHead);
-
 
     for (i = 0; i < drinkHistory[drinkIndex].ingredients.length; i++) {
       ingredientHTML = $("<p>").text(drinkHistory[drinkIndex].ingredients[i]);
@@ -73,19 +70,30 @@ $(document).ready(function() {
       i => i.reciNam === event.target.innerHTML
     );
     var recipeHistory = JSON.parse(localStorage.getItem("recipeHistory"));
-    recipeReadyHTML = $("<p>").text("Ready in " + recipeHistory[reciIndex].reciRea + " minutes");
-    recipeServeHTML = $("<p>").text("Serves " + recipeHistory[reciIndex].reciSer + " people");
+    recipeReadyHTML = $("<p>").text(
+      "Ready in " + recipeHistory[reciIndex].reciRea + " minutes"
+    );
+    recipeServeHTML = $("<p>").text(
+      "Serves " + recipeHistory[reciIndex].reciSer + " people"
+    );
     recipeLinkHTML = $("<a>").text("Click here for recipe");
-    recipeLinkHTML.attr("href",recipeHistory[reciIndex].reciLin);
+    recipeLinkHTML.attr("href", recipeHistory[reciIndex].reciLin);
 
     $("#recipeImage").css(
       "background-image",
       "url(" + recipeHistory[reciIndex].reciImg + ")"
-      );
+    );
     $("#recipeName").text(recipeHistory[reciIndex].reciNam);
     $("#recipeSummary").append(recipeHistory[reciIndex].reciSum);
-    $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
-
+    $("#recipeSummary").append(
+      recipeReadyHTML,
+      "<br>",
+      recipeServeHTML,
+      "<br>",
+      recipeLinkHTML,
+      "<br>",
+      "<br>"
+    );
   });
 
   //click on any movie buttons to display content
@@ -193,12 +201,10 @@ $(document).ready(function() {
     $("#ingredientHeader").append(ingredientHead);
 
     for (i = 0; i < ingredientIndexArray.length; i++) {
-      
       var ingredientNo = ingredientIndexArray[i];
       var ingredient = drinkResponse.drinks[0][ingredientNo];
       var measureNo = measureIndexArray[i];
       var measure = drinkResponse.drinks[0][measureNo];
-     
 
       if (ingredient != null && ingredient != "-") {
         ingredientHTML = $("<p>").text(ingredient + " - " + measure);
@@ -247,7 +253,15 @@ $(document).ready(function() {
 
       $("#recipeImage").css("background-image", "url(" + recipeImage + ")");
       $("#recipeName").text(recipeName);
-      $("#recipeSummary").append(recipeReadyHTML, "<br>", recipeServeHTML, "<br>", recipeLinkHTML, "<br>","<br>");
+      $("#recipeSummary").append(
+        recipeReadyHTML,
+        "<br>",
+        recipeServeHTML,
+        "<br>",
+        recipeLinkHTML,
+        "<br>",
+        "<br>"
+      );
 
       //render recipe history buttons
       var newRecipe = $("<button>");
@@ -262,7 +276,7 @@ $(document).ready(function() {
         reciNam: recipeName,
         reciRea: recipeReady,
         reciSer: recipeServe,
-        reciLin: recipeLink,
+        reciLin: recipeLink
       };
       recipeList.push(recipeEL);
       localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
