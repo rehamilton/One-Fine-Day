@@ -38,7 +38,24 @@ $(document).ready(function() {
       "url(" + drinkHistory[drinkIndex].drinkImg + ")"
     );
     $("#drinkName").text(drinkHistory[drinkIndex].drinkNam);
-    $("#ingredients").html(drinkHistory[drinkIndex].content);
+    $("#ingredientHeader").empty();
+
+    ingredientHead = $("<p>").text("Ingredients:");
+    ingredientHead.attr("class", "has-text-weight-bold");
+    $("#ingredientHeader").append(ingredientHead);
+
+    for (i = 0; i < drinkHistory[drinkIndex].ingredients.length; i++) {
+      ingredientHTML = $("<p>").text(drinkHistory[drinkIndex].ingredients[i]);
+      ingredientHTML.attr("id", [i]);
+      $("#ingredientHeader").append(ingredientHTML);
+    }
+
+    $("#ingredientHeader").append("<br>");
+    instructionHeader = $("<p>").text("Instructions:");
+    instructionText = $("<p>").text(drinkHistory[drinkIndex].instruction);
+    instructionText.attr("id", "instruction");
+    instructionHeader.attr("class", "has-text-weight-bold");
+    $("#ingredientHeader").append(instructionHeader, instructionText);
   });
 
   //click on any recipe buttons to display content
@@ -119,11 +136,19 @@ $(document).ready(function() {
         .first()
         .remove();
       drinkList.shift();
+
+      var ingredients = [];
+      for (i = 0; i <= 15; i++) {
+        var ingredientsEl = $("#" + i).text();
+        ingredients.push(ingredientsEl);
+      }
       var drinkEl = {
         drinkNam: drinkName,
         drinkImg: drinkImageUrl,
-        content: $("#ingredients").contents()
+        instruction: $("#instruction").text(),
+        ingredients: ingredients
       };
+      console.log(drinkEl.content);
       drinkList.push(drinkEl);
       localStorage.setItem("drinkHistory", JSON.stringify(drinkList));
     });
@@ -176,7 +201,7 @@ $(document).ready(function() {
 
     instructionHeader = $("<p>").text("Instructions:");
     instructionText = $("<p>").text(instruction);
-
+    instructionText.attr("id", "instruction");
     instructionHeader.attr("class", "has-text-weight-bold");
     $("#ingredientHeader").append(instructionHeader, instructionText);
   }
