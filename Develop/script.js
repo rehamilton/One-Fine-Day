@@ -7,24 +7,21 @@ $(document).ready(function() {
   //get random items when button is clicked.
   $("#random-button").on("click", function(event) {
     event.preventDefault();
-
     getDrink();
-
     getMovie();
-
     getRecipe();
+  });
 
-    $("#drinkRandom").on("click", function() {
-      getDrink();
-    });
+  $("#drinkRandom").on("click", function() {
+    getDrink();
+  });
 
-    $("#recipeRandom").on("click", function() {
-      getRecipe();
-    });
+  $("#recipeRandom").on("click", function() {
+    getRecipe();
+  });
 
-    $("#movieRandom").on("click", function() {
-      getMovie();
-    });
+  $("#movieRandom").on("click", function() {
+    getMovie();
   });
 
   //click on any drink buttons to display content
