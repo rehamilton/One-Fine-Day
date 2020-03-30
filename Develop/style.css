@@ -5,9 +5,14 @@ h2 {
     font-family: 'Pacifico', cursive;
 
 }
-
-.title,
-.subtitle {
+#intro{
+    font-size: large;
+}
+.intro{
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+.title,.subtitle{
     color: white !important;
     font-family: 'Pacifico', cursive;
     text-shadow: black !important;
@@ -30,8 +35,6 @@ h2 {
     color: white !important;
     font-family: 'Baloo Thambi 2', cursive;
     width: 100%;
-
-
 }
 
 #random-button {
