@@ -1,37 +1,49 @@
-h1,h2{
+h1,
+h2 {
     text-shadow: 3px 3px 3px black;
     color: white !important;
     font-family: 'Pacifico', cursive;
 
 }
+#intro{
+    font-size: large;
+}
+.intro{
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
 .title,.subtitle{
     color: white !important;
     font-family: 'Pacifico', cursive;
-    text-shadow: black !important;  
+    text-shadow: black !important;
 }
 
-.button{
+.button {
     width: 100%;
     font-family: 'Baloo Thambi 2', cursive;
-    background-color:#d6d3d3 !important;
+    background-color: #d6d3d3 !important;
+    white-space: normal !important;
+    word-wrap: break-word;
+    word-break: normal;
 }
 
-#drinkRandom, #recipeRandom, #movieRandom{
+#drinkRandom,
+#recipeRandom,
+#movieRandom {
 
-    background-color:#506165!important;
+    background-color: #506165 !important;
     color: white !important;
     font-family: 'Baloo Thambi 2', cursive;
     width: 100%;
-    
-
 }
 
-#random-button{
-    background-color: #506165!important;
+#random-button {
+    background-color: #506165 !important;
     color: white;
     font-family: 'Baloo Thambi 2', cursive;
     height: 4rem;
     width: 95%;
+
     margin-left: 2%;
 }    
 
@@ -43,11 +55,11 @@ h1,h2{
     background-position: center;
 }
 
-body{
-    background-color:#eeedf2;
+body {
+    background-color: #eeedf2;
 }
 
-p{
+p {
     font-family: 'Baloo Thambi 2', cursive;
     font-size: medium;
 }
@@ -65,7 +77,7 @@ p{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color:#d6d3d3;
+    background-color: #d6d3d3;
 }
 
 #drinkImage {
@@ -75,6 +87,7 @@ p{
     background-position: center;
     background-color: #d6d3d3;
 }
+
 
 .card{
     background-color:  #d6d3d3 !important;
