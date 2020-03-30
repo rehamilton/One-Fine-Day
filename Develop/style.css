@@ -25,6 +25,7 @@ h2 {
     white-space: normal !important;
     word-wrap: break-word;
     word-break: normal;
+    height: fit-content;
 }
 
 #drinkRandom,
