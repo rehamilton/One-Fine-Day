@@ -3,9 +3,12 @@ $(document).ready(function() {
   recipeList = ["recipe 1", "recipe 2", "recipe 3"];
   movieList = ["Movie 1", "Movie 2", "Movie 3"];
   init();
+  var drinkAjaxing = false;
+  var recipeAjaxing = false;
+  var movieAjaxing = false;
 
-  //get random items when button is clicked. Don't activate randomise buttons until  
-  $("#random-button").on("click", function(event) {
+  //get random items when button is clicked. Don't activate randomize buttons until  
+  $("#random-button").on("click", function(event) {   
     event.preventDefault();
 
     getDrink();
@@ -78,7 +81,7 @@ $(document).ready(function() {
     //remove previous information
     $("#recipeSummary").empty();
 
-    //get recipe information fromlocal storage
+    //get recipe information from local storage
     var reciIndex = recipeList.findIndex(
       i => i.reciNam === event.target.innerHTML
     );
@@ -137,7 +140,7 @@ $(document).ready(function() {
     plotText = $("<p>").text(movHistory[movIndex].movPlot);
     breakHTML = $("<br>");
 
-    //place html to the info sectionof the card
+    //place html to the info section of the card
     $("#movieInfo").append(
       ratingHeader,
       ratingText,
@@ -149,6 +152,9 @@ $(document).ready(function() {
 
   //function to get random drink
   function getDrink() {
+    //stop multiple duplicate ajax requests
+    if(drinkAjaxing) return;
+    drinkAjaxing = true;
 
     // remove previous information
     $("#ingredients").empty();
@@ -160,6 +166,7 @@ $(document).ready(function() {
       method: "GET"
 
     }).then(function(drinkResponse) {
+      drinkAjaxing = false;
       //place image responses into existing HTML
       var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb;
       $("#drinkImage").css("background-image", "url(" + drinkImageUrl + ")");
@@ -192,7 +199,7 @@ $(document).ready(function() {
         ingredients.push(ingredientsEl);
       }
 
-      //create anobject from current responses
+      //create an object from current responses
       var drinkEl = {
         drinkNam: drinkName,
         drinkImg: drinkImageUrl,
@@ -208,7 +215,7 @@ $(document).ready(function() {
 
   function getDrinkIngredients(drinkResponse) {
 
-    //remove prvious information
+    //remove previous information
     $("#ingredientHeader").empty();
 
     var ingredientIndexArray = [];
@@ -268,6 +275,9 @@ $(document).ready(function() {
   }
 
   function getRecipe() {
+    //stop multiple duplicate ajax requests
+    if (recipeAjaxing) return;
+    recipeAjaxing = true;    
 
     //remove previous information
     $("#recipeSummary").empty();
@@ -278,6 +288,7 @@ $(document).ready(function() {
       url: "https://api.spoonacular.com/recipes/random?apiKey=7c0986ad6c3445a491cf76f7d2a655ab",
       method: "GET"
     }).then(function(recipeResponse) {
+      recipeAjaxing = false;
       //get responses required to populate card
       var recipeImage = recipeResponse.recipes[0].image;
       var recipeName = recipeResponse.recipes[0].title;
@@ -329,6 +340,9 @@ $(document).ready(function() {
   }
 
   function getMovie() {
+    //stop multiple duplicate ajax requests
+    if (movieAjaxing) return;
+    movieAjaxing = true;    
 
     //remove previous information
     $("#movieInfo").empty();
@@ -338,6 +352,7 @@ $(document).ready(function() {
       url: "https://api.themoviedb.org/3/discover/movie?api_key=f239018644aca27fb1793b1dbcab8d4c",
       method: "GET"
     }).then(function(movieResponse) {
+      movieAjaxing = false;
       
       //get responses required for card
       var movieID = Math.floor(Math.random() * 19);
