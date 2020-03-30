@@ -4,7 +4,7 @@ $(document).ready(function() {
   movieList = ["Movie 1", "Movie 2", "Movie 3"];
   init();
 
-  //get random items when button is clicked.
+  //get random items when button is clicked. Don't activate randomise buttons until  
   $("#random-button").on("click", function(event) {
     event.preventDefault();
 
@@ -13,7 +13,8 @@ $(document).ready(function() {
     getMovie();
 
     getRecipe();
-
+  
+    // create another random selection when these buttons are clicked
     $("#drinkRandom").on("click", function() {
       getDrink();
     });
@@ -30,55 +31,66 @@ $(document).ready(function() {
   //click on any drink buttons to display content
   $("#drink-history").on("click", function(event) {
     event.preventDefault();
+    
+    //remove previous information
     $("#ingredients").empty();
-
+    
+    //get drinkList from local storage
     var drinkIndex = drinkList.findIndex(
       i => i.drinkNam === event.target.innerHTML
     );
     var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
-
+    
+    //add responses to existing HTML
     $("#drinkImage").css(
       "background-image",
       "url(" + drinkHistory[drinkIndex].drinkImg + ")"
     );
     $("#drinkName").text(drinkHistory[drinkIndex].drinkNam);
-    $("#ingredients").empty();
 
+    //move to ingredient info start with header
     ingredientHead = $("<p>").text("Ingredients:");
     ingredientHead.attr("class", "has-text-weight-bold");
     $("#ingredients").append(ingredientHead);
 
+    //get all ingredients from object and create new HTML for each
     for (i = 0; i < drinkHistory[drinkIndex].ingredients.length; i++) {
       ingredientHTML = $("<p>").text(drinkHistory[drinkIndex].ingredients[i]);
       ingredientHTML.attr("id", [i]);
       $("#ingredients").append(ingredientHTML);
     }
 
-    $("#ingredients").append("<br>");
+    //create new HTML for instruction response
     instructionHeader = $("<p>").text("Instructions:");
+    instructionHeader.attr("class", "has-text-weight-bold");
+
     instructionText = $("<p>").text(drinkHistory[drinkIndex].instruction);
     instructionText.attr("id", "instruction");
-    instructionHeader.attr("class", "has-text-weight-bold");
-    $("#ingredients").append(instructionHeader, instructionText);
+   
+    //add new responses HTML to existing HTML
+    $("#ingredients").append("<br>", instructionHeader, instructionText);
   });
 
   //click on any recipe buttons to display content
   $("#recipe-history").on("click", function(event) {
     event.preventDefault();
+
+    //remove previous information
     $("#recipeSummary").empty();
+
+    //get recipe information fromlocal storage
     var reciIndex = recipeList.findIndex(
       i => i.reciNam === event.target.innerHTML
     );
     var recipeHistory = JSON.parse(localStorage.getItem("recipeHistory"));
-    recipeReadyHTML = $("<p>").text(
-      "Ready in " + recipeHistory[reciIndex].reciRea + " minutes"
-    );
-    recipeServeHTML = $("<p>").text(
-      "Serves " + recipeHistory[reciIndex].reciSer + " people"
-    );
+
+    //create new HTM for responses
+    recipeReadyHTML = $("<p>").text("Ready in " + recipeHistory[reciIndex].reciRea + " minutes");
+    recipeServeHTML = $("<p>").text("Serves " + recipeHistory[reciIndex].reciSer + " people");
     recipeLinkHTML = $("<a>").text("Click here for recipe");
     recipeLinkHTML.attr("href", recipeHistory[reciIndex].reciLin);
 
+    //append new HTML and responses to existing HTML
     $("#recipeImage").css(
       "background-image",
       "url(" + recipeHistory[reciIndex].reciImg + ")"
@@ -100,17 +112,23 @@ $(document).ready(function() {
   $("#movie-history").on("click", function(event) {
     event.preventDefault();
 
+    //remove previous information
     $("#movieInfo").empty();
 
+    //get relevant stored movie information object
     var movIndex = movieList.findIndex(
       i => i.movNam === event.target.innerHTML
     );
     var movHistory = JSON.parse(localStorage.getItem("movieHistory"));
+
+    //Populate image and movie name
     $("#movieImage").css(
       "background-image",
       "url(" + movHistory[movIndex].movImg + ")"
     );
     $("#movieName").text(movHistory[movIndex].movNam);
+    
+    //create HTML for movie information
     ratingHeader = $("<p>").text("Rating:");
     ratingHeader.attr("class", "has-text-weight-bold");
     ratingText = $("<p>").text(movHistory[movIndex].movRate);
@@ -119,6 +137,7 @@ $(document).ready(function() {
     plotText = $("<p>").text(movHistory[movIndex].movPlot);
     breakHTML = $("<br>");
 
+    //place html to the info sectionof the card
     $("#movieInfo").append(
       ratingHeader,
       ratingText,
@@ -130,26 +149,29 @@ $(document).ready(function() {
 
   //function to get random drink
   function getDrink() {
+
+    // remove previous information
     $("#ingredients").empty();
+    $("#drinkName").empty();
 
-    var drinkUrl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
-
+    //call from drink API "thecocktaildb"
     $.ajax({
-      url: drinkUrl,
+      url: "https://www.thecocktaildb.com/api/json/v1/1/random.php",
       method: "GET"
 
-      //on error show apologies and have a drink on us (use stored image)
     }).then(function(drinkResponse) {
-      //console.log(drinkResponse.drinks[0]);
+      //place image responses into existing HTML
       var drinkImageUrl = drinkResponse.drinks[0].strDrinkThumb;
       $("#drinkImage").css("background-image", "url(" + drinkImageUrl + ")");
 
       var drinkName = drinkResponse.drinks[0].strDrink;
       $("#drinkName").text(drinkName);
 
+      //create HTML for information text
       ingredientHeader = $("<p>").text("Ingredients:");
       ingredientHeader.attr("id", "ingredientHeader");
 
+      //add new HTML to existing HTML
       $("#ingredients").append(ingredientHeader);
 
       getDrinkIngredients(drinkResponse);
@@ -163,49 +185,58 @@ $(document).ready(function() {
         .remove();
       drinkList.shift();
 
+
       var ingredients = [];
       for (i = 0; i <= 15; i++) {
         var ingredientsEl = $("#" + i).text();
         ingredients.push(ingredientsEl);
       }
+
+      //create anobject from current responses
       var drinkEl = {
         drinkNam: drinkName,
         drinkImg: drinkImageUrl,
         instruction: $("#instruction").text(),
         ingredients: ingredients
       };
-      //console.log(drinkEl.content);
+
+      //push object to local storage
       drinkList.push(drinkEl);
       localStorage.setItem("drinkHistory", JSON.stringify(drinkList));
     });
   }
 
   function getDrinkIngredients(drinkResponse) {
+
+    //remove prvious information
     $("#ingredientHeader").empty();
 
     var ingredientIndexArray = [];
     var measureIndexArray = [];
 
+    //start with header
+    ingredientHead = $("<p>").text("Ingredients:");
+    ingredientHead.attr("class", "has-text-weight-bold");
+    $("#ingredientHeader").append(ingredientHead);
+
+    //there are 15 instructions in each API response go through and create the names associated within the response and make an array from them
     for (i = 1; i <= 15; i++) {
-      //console.log(i);
+     
       var ingredientIndex = "strIngredient" + [i];
-      // console.log(ingredientIndex);
       ingredientIndexArray.push(ingredientIndex);
 
       var measureIndex = "strMeasure" + [i];
       measureIndexArray.push(measureIndex);
     }
 
-    ingredientHead = $("<p>").text("Ingredients:");
-    ingredientHead.attr("class", "has-text-weight-bold");
-    $("#ingredientHeader").append(ingredientHead);
-
+    //go through the new array and get responses 
     for (i = 0; i < ingredientIndexArray.length; i++) {
       var ingredientNo = ingredientIndexArray[i];
       var ingredient = drinkResponse.drinks[0][ingredientNo];
       var measureNo = measureIndexArray[i];
       var measure = drinkResponse.drinks[0][measureNo];
-
+     
+      // remove responses with no text or "-" only. Place text responses into HTML
       if (ingredient != null && ingredient != "-") {
         ingredientHTML = $("<p>").text(ingredient + " - " + measure);
         ingredientHTML.attr("id", [i]);
@@ -213,44 +244,54 @@ $(document).ready(function() {
       }
     }
 
+    //add spacing for aesthetics
     $("#ingredientHeader").append("<br>");
 
     getDrinkInstructions(drinkResponse);
   }
 
   function getDrinkInstructions(drinkResponse) {
-    var instruction = drinkResponse.drinks[0].strInstructions;
-    //console.log(instruction);
 
+    //get instruction response from API
+    var instruction = drinkResponse.drinks[0].strInstructions;
+
+    //start with header HTML
     instructionHeader = $("<p>").text("Instructions:");
+    instructionHeader.attr("class", "has-text-weight-bold");
+
+    //place response into new HTML
     instructionText = $("<p>").text(instruction);
     instructionText.attr("id", "instruction");
-    instructionHeader.attr("class", "has-text-weight-bold");
+    
+    //append both to existing HTML
     $("#ingredientHeader").append(instructionHeader, instructionText);
   }
 
   function getRecipe() {
+
+    //remove previous information
     $("#recipeSummary").empty();
+    $("#recipeName").empty();
 
-    var recipeUrl =
-      "https://api.spoonacular.com/recipes/random?apiKey=7c0986ad6c3445a491cf76f7d2a655ab";
-
+    //call from recipe API "spoonacular"
     $.ajax({
-      url: recipeUrl,
+      url: "https://api.spoonacular.com/recipes/random?apiKey=7c0986ad6c3445a491cf76f7d2a655ab",
       method: "GET"
     }).then(function(recipeResponse) {
-      //console.log(recipeResponse.recipes[0]);
+      //get responses required to populate card
       var recipeImage = recipeResponse.recipes[0].image;
       var recipeName = recipeResponse.recipes[0].title;
       var recipeReady = recipeResponse.recipes[0].readyInMinutes;
       var recipeServe = recipeResponse.recipes[0].servings;
       var recipeLink = recipeResponse.recipes[0].sourceUrl;
 
+      //create new HTML for information
       recipeReadyHTML = $("<p>").text("Ready in " + recipeReady + " minutes");
       recipeServeHTML = $("<p>").text("Serves " + recipeServe + " people");
       recipeLinkHTML = $("<a>").text("Click here for recipe");
       recipeLinkHTML.attr("href", recipeLink);
 
+      //place responses and new HTML into existing HTML
       $("#recipeImage").css("background-image", "url(" + recipeImage + ")");
       $("#recipeName").text(recipeName);
       $("#recipeSummary").append(
@@ -271,6 +312,8 @@ $(document).ready(function() {
         .first()
         .remove();
       recipeList.shift();
+
+      //create object from current response
       var recipeEL = {
         reciImg: recipeImage,
         reciNam: recipeName,
@@ -278,23 +321,26 @@ $(document).ready(function() {
         reciSer: recipeServe,
         reciLin: recipeLink
       };
+
+      //push new object to local storage
       recipeList.push(recipeEL);
       localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
     });
   }
 
   function getMovie() {
+
+    //remove previous information
     $("#movieInfo").empty();
 
-    var movieUrl =
-      "https://api.themoviedb.org/3/discover/movie?api_key=f239018644aca27fb1793b1dbcab8d4c";
-
+    //call from movie API "themoviedb"
     $.ajax({
-      url: movieUrl,
+      url: "https://api.themoviedb.org/3/discover/movie?api_key=f239018644aca27fb1793b1dbcab8d4c",
       method: "GET"
     }).then(function(movieResponse) {
+      
+      //get responses required for card
       var movieID = Math.floor(Math.random() * 19);
-      //console.log(movieResponse.results[movieID]);
       var movie = movieResponse.results[movieID].title;
       var poster =
         "https://image.tmdb.org/t/p/original" +
@@ -302,10 +348,11 @@ $(document).ready(function() {
       var rating = movieResponse.results[movieID].vote_average + "/10";
       var plot = movieResponse.results[movieID].overview;
 
+      //place responses into existing HTML
       $("#movieName").text(movie);
-
       $("#movieImage").css("background-image", "url(" + poster + ")");
 
+      //create new HTML for rest of responses
       ratingHeader = $("<p>").text("Rating:");
       ratingHeader.attr("class", "has-text-weight-bold");
       ratingText = $("<p>").text(rating);
@@ -314,6 +361,7 @@ $(document).ready(function() {
       plotText = $("<p>").text(plot);
       breakHTML = $("<br>");
 
+      //append new HTML to existing HTML
       $("#movieInfo").append(
         ratingHeader,
         ratingText,
@@ -330,12 +378,16 @@ $(document).ready(function() {
         .first()
         .remove();
       movieList.shift();
+
+      //create object from current response
       var movieEl = {
         movNam: movie,
         movImg: poster,
         movRate: rating,
         movPlot: plot
       };
+
+      //push new object to local storage
       movieList.push(movieEl);
       localStorage.setItem("movieHistory", JSON.stringify(movieList));
     });
