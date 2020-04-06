@@ -412,39 +412,45 @@ $(document).ready(function() {
   function init() {
     //keep last three random history
     var drinkHistory = JSON.parse(localStorage.getItem("drinkHistory"));
+    //handle first time use    
     if (drinkHistory == null) {
       localStorage.setItem("drinkHistory", JSON.stringify(drinkList));
       for (var i = 0; i < drinkList.length; i++) {
         $("#drink-" + i).text(drinkList[i]);
       }
-    } //handle first time use
+    } else {
     drinkList = drinkHistory;
     for (var i = 0; i < drinkHistory.length; i++) {
       $("#drink-" + i).text(drinkHistory[i].drinkNam);
     }
+  }
 
     var recipeHistory = JSON.parse(localStorage.getItem("recipeHistory"));
+    //handle first time use    
     if (recipeHistory == null) {
       localStorage.setItem("recipeHistory", JSON.stringify(recipeList));
       for (var i = 0; i < recipeList.length; i++) {
         $("#recipe-" + i).text(recipeList[i]);
       }
-    } //handle first time use
+    } else { 
     recipeList = recipeHistory;
     for (var i = 0; i < recipeHistory.length; i++) {
       $("#recipe-" + i).text(recipeHistory[i].reciNam);
     }
+  }
 
     var movHistory = JSON.parse(localStorage.getItem("movieHistory"));
+    //handle first time use
     if (movHistory == null) {
       localStorage.setItem("movieHistory", JSON.stringify(movieList));
       for (var i = 0; i < movieList.length; i++) {
         $("#movie-" + i).text(movieList[i]);
       }
-    } //handle first time use
+    } else {
     movieList = movHistory;
     for (var i = 0; i < movHistory.length; i++) {
       $("#movie-" + i).text(movHistory[i].movNam);
     }
   }
+}
 });
