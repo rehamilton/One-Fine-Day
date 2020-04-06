@@ -27,9 +27,8 @@ h2 {
     font-family: 'Baloo Thambi 2', cursive;
     background-color: #d6d3d3 !important;
     white-space: normal !important;
-    word-wrap: break-word;
-    word-break: normal;
-    height: fit-content;
+    word-wrap: break-word !important;
+    height: fit-content !important;
 }
 
 #drinkRandom,
